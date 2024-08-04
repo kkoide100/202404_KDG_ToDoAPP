@@ -1,26 +1,24 @@
 
 "use client"
 import { Database } from "@/types/database.types"
-import { useState } from "react"
-
-import { ChangeEvent } from "react"
+import { useState, ChangeEvent } from "react"
 
 type task = Database["public"]["Tables"]["task"]["Insert"]
 
 export default function AddTask() {
-    const [data, setData] = useState<task>({name: ""})
+    const [payload, setPayload] = useState<task>({name: ""})
 
     function onSubmit() {
         fetch("/api/task", {
             "method": "POST",
-            body: JSON.stringify({data})
+            "body": JSON.stringify(payload)
         })
     }
 
-    const nameChange = (e: ChangeEvent<HTMLInputElement>) => setData({"name": e.target.value});
+    const nameChange = (e: ChangeEvent<HTMLInputElement>) => setPayload({"name": e.target.value});
     return(
         <>
-            <input onChange={nameChange} name="name" value={data?.name} type="text"/>
+            <input onChange={nameChange} name="name" value={payload?.name} type="text"/>
             <button onClick={onSubmit}>ボタン</button>
         </>
     )
