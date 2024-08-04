@@ -49,7 +49,7 @@ export default function ViewTask() {
     return(
         <section className="container">
             <div className="flex flex-col flex-warp">
-            {data.data.map((item:task) => <TaskItem data={item} />)}
+            {data.map((item:task) => <TaskItem key={item.id} data={item} />)}
             </div>
         </section>
     )
