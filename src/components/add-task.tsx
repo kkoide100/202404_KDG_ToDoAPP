@@ -11,7 +11,6 @@ export default function AddTask() {
     const [data, setData] = useState<task>({name: ""})
 
     function onSubmit() {
-        console.log("動いてるよ")
         fetch("/api/task", {
             "method": "POST",
             body: JSON.stringify({data})
