@@ -8,26 +8,20 @@ export async function GET(request: NextRequest) {
     const supabase = await SupabaseClient()
     const {data, error} = await supabase.from("task").select("*")
 
-    console.log(data)
-
     if(error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json(data, {status:200})
 }
 
-// export async function POST(request:NextRequest, response: NextResponse) {
-//     let body = await request.json()
-//     body = body.data
-//     const payload:task = {
-//         name: body.name,
-//         end_date: body.end_d,
-//         status: body.status,
-//         detail: body.detail
-//     }
+export async function POST(request:NextRequest, response: NextResponse) {
+    let body = await request.json()
 
-//     const supabase = await SupabaseClient()
-//     const {data, error} = await supabase.from("task").insert(payload).select("id").single()
+    const payload:task = {
+        name: body.name,
+    }
 
-//     if(error) return NextResponse.error
+    const supabase = await SupabaseClient()
+    const {data, error} = await supabase.from("task").insert(payload).select("id").single()
 
-//     return NextResponse.json({data}, {status:200})
-// }
+    if(error) return NextResponse.error
+    return NextResponse.json(data, {status:200})
+}
