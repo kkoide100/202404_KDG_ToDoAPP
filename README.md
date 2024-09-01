@@ -13,9 +13,14 @@
 
 
 # Supabaseを操作してDBにタスクを入れよう
-
 1. `http://localhost:54323/project/default/editor`にアクセス
 2. task > Insert
 
 # ToDo
   - ToDoを発行するAPIを開発しよう。
+
+
+# トラブルシュミレーティング
+- `localhost:3000`でError...と表示される
+  - Supabaseの画面からデータを何か入れてますか？
+  - 環境変数は間違えていないですか？
