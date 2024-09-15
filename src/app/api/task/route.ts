@@ -1,8 +1,6 @@
 import supabaseClient from "@/utils/supabase/create-client";
 import { NextRequest, NextResponse } from "next/server";
-import { Database } from "@/types/database.types";
-
-type task = Database["public"]["Tables"]["task"]["Insert"]
+import { createTaskSchema } from "@/types/task-schema";
 
 export async function GET(request: NextRequest) {
     const supabase = await supabaseClient()
@@ -13,11 +11,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request:NextRequest, response: NextResponse) {
-    let body = await request.json()
-
-    const payload:task = {
-        name: body.name,
-    }
+    const body = await request.json()
+    const payload = createTaskSchema.parse(body);
 
     const supabase = await supabaseClient()
     const {data, error} = await supabase.from("task").insert(payload).select("id").single()
