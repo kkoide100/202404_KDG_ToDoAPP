@@ -27,7 +27,7 @@ export default function CreateTaskForm() {
         <>
         <form onSubmit={handleSubmit(onSubmit)}>
             <input {...register("name")} type="text" />
-            <button type="submit">タスク起票</button>
+            <button type="submit">タスクを登録する</button>
         </form>
         {errors.name && <span>{errors.name.message}</span>}
         </>
